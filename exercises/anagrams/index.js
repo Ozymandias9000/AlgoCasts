@@ -37,7 +37,7 @@ const cleanUp = str => {
     .toLowerCase()
     .split("")
     .sort()
-    .join('');
+    .join("");
 };
 
 module.exports = anagrams;

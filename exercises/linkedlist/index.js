@@ -74,7 +74,51 @@ class LinkedList {
     let node = this.getLast();
     if (node) {
       node.next = new Node(data);
-    } else new Node(data);
+    } else this.head = new Node(data);
+  }
+
+  getAt(int) {
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === int) {
+        return node;
+      }
+      counter++;
+      node = node.next;
+    }
+    return null;
+  }
+
+  removeAt(int) {
+    if(!this.head) return;
+    if(int === 0) return this.head = this.head.next;
+    const prev = this.getAt(int - 1);
+    if (!prev || !prev.next) return;
+    prev.next = prev.next.next;
+  }
+
+  insertAt(data, int) {
+    if (!this.head || int === 0) return this.insertFirst(data);
+    const prev = this.getAt(int - 1) || this.getLast();
+    prev.next = new Node(data, prev.next);
+  }
+
+  forEach(fn) {
+    let node = this.head;
+
+    while (node) {
+      fn(node);
+      node = node.next;
+    }
+  }
+
+  *[Symbol.iterator]() {
+    let node = this.head;
+    while(node) {
+      yield node;
+      node = node.next;
+    }
   }
 }
 
